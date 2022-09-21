@@ -1,0 +1,39 @@
+version: '3.3'
+
+services:
+
+  # NGINX
+  nginx:
+    container_name: "${APP_NAME}-nginx"
+    build:
+      context: ./docker/nginx
+      dockerfile: Dockerfile
+    ports:
+      - '${HTTP_PORT:-80}:80'
+    volumes:
+      - ./logs:/var/log/nginx
+      - .:/var/www
+    links:
+      - php
+    depends_on:
+      - php
+    networks:
+      - localnet
+
+  # PHP
+  php:
+    container_name: "${APP_NAME}-php"
+    build:
+      context: ./docker/php
+      dockerfile: Dockerfile
+    links:
+      - mysql
+    volumes:
+      - .:/var/www
+      - ./logs:/var/log/php
+    networks:
+      - localnet
+
+networks:
+  localnet:
+    driver: bridge
