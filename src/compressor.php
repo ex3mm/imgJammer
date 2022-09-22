@@ -1,7 +1,7 @@
 <?php
 set_time_limit(0);
 
-$compress = 50; // % Сжатия
+$compress = 75; // %
 $timeStart = time();
 
 // Get all folders
@@ -10,7 +10,7 @@ foreach (getAllFolders(__DIR__) as $folder){
     echo PHP_EOL.time()." - dir - ".$folder.PHP_EOL;
 
     // Search images in folder
-    $images = glob($folder.'/*.{JPG,jpg,JPEG,jpeg,PNG,png}', GLOB_BRACE); // array / full path
+    $images = glob($folder.'/*.{JPG,jpg,JPEG,jpeg}', GLOB_BRACE); // array / full path
 
     foreach ($images as $image){
         echo time()." - compressing image - ".$image.PHP_EOL;
@@ -52,10 +52,6 @@ function compress($source, $destination, $compress) {
     // JPEG
     if ($info['mime'] == 'image/jpeg')
         $image = imagecreatefromjpeg($source);
-
-    // PNG
-    elseif ($info['mime'] == 'image/png')
-        $image = imagecreatefrompng($source);
 
     else
         return false;
