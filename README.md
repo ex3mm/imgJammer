@@ -15,3 +15,8 @@
 > php compressor.php
 - Запуск из консоли в фоновом режиме с записью лога
 > nohup php -q compressor.php > compressor.log 2>&1 &
+
+###  Остановка в фоне
+> ps ax | grep 'compressor.php'
+>
+> kill pid процесса

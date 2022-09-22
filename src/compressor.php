@@ -1,7 +1,7 @@
 <?php
 set_time_limit(0);
 
-$compress = 75; // %
+$compress = 90; // %
 $timeStart = time();
 
 // Get all folders
